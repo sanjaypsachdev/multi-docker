@@ -11,25 +11,25 @@ class Fib extends Component {
   async fetchAll() {
     const values =  await axios.get('/api/values/current');
     const seenIndexes =  await axios.get('/api/values/all');
-    this.setState({
+    this.setState(() => ({
       seenIndexes: seenIndexes.data,
       values: values.data,
       index:''
-    });
+    }));
   }
 
   async fetchValues() {
     const values =  await axios.get('/api/values/current');
-    this.setState({
+    this.setState(() =>  ({
       values: values.data
-    });
+    }));
   }
 
   async fetchIndexes() {
     const seenIndexes =  await axios.get('/api/values/all');
-    this.setState({
+    this.setState(() =>  ({
       seenIndexes: seenIndexes.data
-    });
+    }));
   }
 
   componentDidMount() {
@@ -65,11 +65,12 @@ class Fib extends Component {
   }
 
   render() {
+    console.log('rendering')
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>Enter your index: </label>
-          <input 
+          <input
             value={this.state.index}
             onChange={event => this.setState({ index: event.target.value })}
           />
