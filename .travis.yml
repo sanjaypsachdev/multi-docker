@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sanjaypsachdev/multi-client-test -f ./client/Dockerfile.dev ./client
+
+script:
+  docker run -e CI=true sanjaypsachdev/client-test yarn test
+
+after_success:
+  - docker build -t sanjaypsachdev/multi-client ./client
+  - docker build -t sanjaypsachdev/multi-nginx ./nginx
+  - docker build -t sanjaypsachdev/multi-server ./server
+  - docker build -t sanjaypsachdev/multi-worker ./worker
+  # Log in to the docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push sanjaypsachdev/multi-client
+  - docker push sanjaypsachdev/multi-nginx
+  - docker push sanjaypsachdev/multi-server
+  - docker push sanjaypsachdev/multi-worker
