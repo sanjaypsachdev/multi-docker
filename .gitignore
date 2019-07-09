@@ -1,19 +1,19 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/react-client/node_modules
+/client/node_modules
 /server/node_modules
 /worker/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/react-client/coverage
+/client/coverage
 /server/coverage
 /worker/coverage
 
 # production
-/react-client/build
+/client/build
 /server/build
 /worker/build
 
