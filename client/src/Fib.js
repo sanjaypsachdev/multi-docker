@@ -65,7 +65,6 @@ class Fib extends Component {
   }
 
   render() {
-    console.log('rendering')
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
