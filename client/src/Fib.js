@@ -11,15 +11,11 @@ class Fib extends Component {
   async fetchAll() {
     const values =  await axios.get('/api/values/current');
     const seenIndexes =  await axios.get('/api/values/all');
-    const valuesLatest = values.data ? values.data : this.state.values;
-    const seenIndexesLatest = seenIndexes.data ? seenIndexes.data : this.state.seenIndexes;
-    if (valuesLatest != this.state.values || seenIndexesLatest != this.state.seenIndexes) {
-      this.setState(() => ({
-        seenIndexes: seenIndexes.data,
-        values: values.data,
-        index:''
-      }));
-    }
+    this.setState(() => ({
+      seenIndexes: seenIndexes.data,
+      values: values.data,
+      index:''
+    }));
   }
 
   async fetchValues() {
