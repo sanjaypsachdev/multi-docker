@@ -11,25 +11,31 @@ class Fib extends Component {
   async fetchAll() {
     const values =  await axios.get('/api/values/current');
     const seenIndexes =  await axios.get('/api/values/all');
-    this.setState(() => ({
-      seenIndexes: seenIndexes.data,
-      values: values.data,
-      index:''
-    }));
+    if ((seenIndexes && Array.isArray(seenIndexes.data)) && (values && typeof values.data === 'object')) {
+      this.setState(() => ({
+        seenIndexes: seenIndexes.data,
+        values: values.data,
+        index:''
+      }));
+    }
   }
 
   async fetchValues() {
     const values =  await axios.get('/api/values/current');
-    this.setState(() =>  ({
-      values: values.data
-    }));
+    if (values && typeof values.data === 'object') {
+      this.setState(() =>  ({
+        values: values.data
+      }));
+    }
   }
 
   async fetchIndexes() {
     const seenIndexes =  await axios.get('/api/values/all');
-    this.setState(() =>  ({
-      seenIndexes: seenIndexes.data
-    }));
+    if (seenIndexes && Array.isArray(seenIndexes.data)) {
+      this.setState(() =>  ({
+        seenIndexes: seenIndexes.data
+      }));
+    }
   }
 
   componentDidMount() {
